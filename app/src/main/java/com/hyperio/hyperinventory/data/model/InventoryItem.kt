@@ -1,13 +1,17 @@
 package com.hyperio.hyperinventory.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import java.math.BigDecimal
 
+@Entity(tableName = "InventoryTable")
 data class InventoryItem(
+    @PrimaryKey(autoGenerate = true)
+    val uid: Int = 0,
     val name: String,
-    val quantity: Int,
-    val price: Double,
+    var quantity: Int,
+    val price: BigDecimal,
 ) {
-    val totalPrice: Double
-        get() = price * quantity
-
-    val id: Int get() = hashCode()
+    val totalPrice: BigDecimal
+        get() = price.times(BigDecimal(quantity))
 }
