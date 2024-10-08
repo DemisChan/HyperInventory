@@ -1,4 +1,4 @@
-package com.hyperio.hyperinventory.data.model
+package com.hyperio.hyperinventory.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
