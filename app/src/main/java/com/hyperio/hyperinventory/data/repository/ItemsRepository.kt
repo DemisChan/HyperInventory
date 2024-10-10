@@ -8,7 +8,7 @@ interface ItemsRepository {
     fun getAllItems(): Flow<List<InventoryItem>>
     fun getItem(uid: Int): Flow<InventoryItem>
 
-    suspend fun upserItem(item: InventoryItem)
+    suspend fun upsertItem(item: InventoryItem)
 
     suspend fun deleteItem(item: InventoryItem)
 

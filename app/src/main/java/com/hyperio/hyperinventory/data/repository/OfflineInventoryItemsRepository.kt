@@ -11,7 +11,7 @@ class OfflineInventoryItemsRepository(private val inventoryItemsDao: InventoryDa
 
     override fun getItem(uid: Int): Flow<InventoryItem> = inventoryItemsDao.getItem(uid)
 
-    override suspend fun upserItem(item: InventoryItem) = inventoryItemsDao.upsertItem(item)
+    override suspend fun upsertItem(item: InventoryItem) = inventoryItemsDao.upsertItem(item)
 
     override suspend fun deleteItem(item: InventoryItem) = inventoryItemsDao.deleteItem(item)
 }

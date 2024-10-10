@@ -11,7 +11,7 @@ abstract class InventoryDatabase : RoomDatabase() {
     abstract fun inventoryDao(): InventoryDao
 
     companion object {
-        const val DATABASE_NAME = "inventory_database"
+        private const val DATABASE_NAME = "inventory_database"
 
         @Volatile
         private var Instance: InventoryDatabase? = null
