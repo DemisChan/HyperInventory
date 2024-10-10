@@ -23,6 +23,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -30,10 +32,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hyperio.hyperinventory.R
 import com.hyperio.hyperinventory.domain.model.InventoryItem
 import com.hyperio.hyperinventory.navigation.NavigationDestination
 import com.hyperio.hyperinventory.ui.InventoryTopAppBar
+import com.hyperio.hyperinventory.ui.ViewModelFactoryProvider
 import com.hyperio.hyperinventory.ui.theme.HyperInventoryTheme
 import java.math.BigDecimal
 
@@ -47,8 +51,10 @@ object HomeDestination : NavigationDestination {
 fun StartScreen(
     navigateToItemEntry: () -> Unit,
     navigateToItemUpdate: (Int) -> Unit,
+    viewModel: StartViewModel = viewModel(factory = ViewModelFactoryProvider.Factory),
     modifier: Modifier = Modifier
 ) {
+    val homeUiState by viewModel.homeUiState.collectAsState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Scaffold(
@@ -74,7 +80,7 @@ fun StartScreen(
         },
     ) { innerPadding ->
         StartBody(
-            itemList = listOf(),
+            itemList = homeUiState.itemList,
             onItemClick = navigateToItemUpdate,
             modifier = Modifier.fillMaxSize(),
             contentPadding = innerPadding
@@ -173,9 +179,9 @@ private fun InventoryItem(
 fun StartBodyListPreview() {
     HyperInventoryTheme {
         StartBody(listOf(
-            InventoryItem(1, "Monitor", 100, BigDecimal(2)),
-            InventoryItem(2, "Mouse", 100, BigDecimal(2)),
-            InventoryItem(3, "Keyboard", 100, BigDecimal(2)),
+            InventoryItem(1, "Monitor", 100, 200.0),
+            InventoryItem(2, "Mouse", 100, 20.0),
+            InventoryItem(3, "Keyboard", 100, 15.0),
         ), onItemClick = {})
     }
 }
@@ -193,7 +199,7 @@ fun StartBodyEmptyListPreview() {
 fun InventoryItemPreview() {
     HyperInventoryTheme {
         InventoryItem(
-            InventoryItem(1, "Monitor", 100, BigDecimal(2)),
+            InventoryItem(1, "Monitor", 100, 20.0)
         )
     }
 }

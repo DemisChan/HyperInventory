@@ -14,10 +14,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.hyperio.hyperinventory.R
+import com.hyperio.hyperinventory.navigation.InventoryNavHost
 
 @Composable
 fun MainApp(navController: NavHostController = rememberNavController()) {
-
+    InventoryNavHost(navController = navController)
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

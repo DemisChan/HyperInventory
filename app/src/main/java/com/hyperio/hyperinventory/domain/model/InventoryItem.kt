@@ -10,8 +10,16 @@ data class InventoryItem(
     val uid: Int = 0,
     val name: String,
     var quantity: Int,
-    val price: BigDecimal,
+    val price: Double,
 ) {
-    val totalPrice: BigDecimal
-        get() = price.times(BigDecimal(quantity))
+    val totalPrice: Double
+        get() = price.times(quantity)
+
+    fun formatedPrice(): String {
+        return "$$price"
+    }
+
+    fun formatedTotalPrice(): String {
+        return "$$totalPrice"
+    }
 }
